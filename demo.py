@@ -38,7 +38,7 @@ def colorShift():
 
     _=os.system("color 0" + hexColor())
 
-loading = [
+loadingArray = [
 r".____                            .___ .__                    ",
 r"|    |       ____   _____      __| _/ |__|   ____      ____  ",
 r"|    |      /  _ \  \__  \    / __ |  |  |  /    \    / ___\ ",
@@ -61,29 +61,29 @@ def loading():
         print('{:{a}{w}}'.format(length * getWeirdChar(), w=width, a=align), end="")
         sys.stdout.flush()
 
-    try:
-        i = 0
-        growing = True
-        align = '^'
+# try:
+    i = 0
+    growing = True
+    align = '^'
 
-        while(True):
-            renderRow(i, align)
-            sleep(.03)
-            a = not ((i>1) or growing)
-            b = not((i<width) or not growing)
+    while(True):
+        renderRow(i, align)
+        sleep(.03)
+        a = not ((i>1) or growing)
+        b = not((i<width) or not growing)
 
-            if i < width and growing:
-                i += frameSize
-            elif a or b:
-                growing = not growing
-                align = choice(alignments)
-                for _ in loading:
-                    sleep(.2)
-                    print("{:{a}{w}}".format(_, a=align, w=width), end="")
-                    sys.stdout.flush()
-                    colorShift()
-                sleep(.5)
-            else:
-                i -= frameSize
-    except:
-        os.system("color 0a")
+        if i < width and growing:
+            i += frameSize
+        elif a or b:
+            growing = not growing
+            align = choice(alignments)
+            for line in loadingArray:
+                sleep(.2)
+                print("{:{a}{w}}".format(line, a=align, w=width), end="")
+                sys.stdout.flush()
+                colorShift()
+            sleep(.5)
+        else:
+            i -= frameSize
+#except:
+    os.system("color 0a")
